@@ -1,7 +1,23 @@
 <h1>Items</h1>
 
-<ul>
-  <% @items.each do |item| %>
-    <li><%= link_to item.name, item_path(item) %></li>
-  <% end %>
-</ul>
+<form method="get" action="<%= items_path %>">
+  <input type="text" name="q" value="<%= @query %>" placeholder="Search…" />
+  <button type="submit">Search</button>
+</form>
+
+<% if @query.present? %>
+  <p>
+    Showing results for "<%= @query %>" (<%= @items.size %>)
+    • <%= link_to "Clear", items_path %>
+  </p>
+<% end %>
+
+<% if @items.any? %>
+  <ul>
+    <% @items.each do |item| %>
+      <li><%= link_to item.name, item_path(item) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No items found.</p>
+<% end %>

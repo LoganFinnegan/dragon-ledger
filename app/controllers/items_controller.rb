@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.order(:name).limit(50)
+    @query = params[:q].to_s.strip
+
+    scope = Item.order(:name)
+    scope = scope.where("name ILIKE ?", "%#{@query}%") if @query.present?
+
+    @items = scope.limit(100)
   end
 
   def show
