@@ -1,3 +1,10 @@
 <h1>Dragon Ledger</h1>
-<p>Welcome to the landing page.</p>
-<p><a href="/items">Items</a></p>
+
+<form action="<%= items_path %>" method="get">
+  <label>
+    Search items
+    <input type="text" name="q" value="<%= params[:q].to_s %>" placeholder="Type an item name…" />
+  </label>
+
+  <button type="submit">Search</button>
+</form>
