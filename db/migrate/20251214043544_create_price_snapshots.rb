@@ -11,7 +11,7 @@ class CreatePriceSnapshots < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :price_snapshots, [:item_id, :series, :sampled_at], unique: true
-    add_index :price_snapshots, [:item_id, :sampled_at]
+    add_index :price_snapshots, [ :item_id, :series, :sampled_at ], unique: true
+    add_index :price_snapshots, [ :item_id, :sampled_at ]
   end
 end

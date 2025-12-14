@@ -3,7 +3,7 @@
 module Rs3
   class ItemdbClient
     BASE_URL = "https://secure.runescape.com/m=itemdb_rs".freeze
-    
+
 
     def initialize(http: default_http)
       @http = http

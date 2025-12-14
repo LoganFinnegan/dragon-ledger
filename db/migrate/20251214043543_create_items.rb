@@ -13,7 +13,7 @@ class CreateItems < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :items, [:game, :external_id], unique: true
+    add_index :items, [ :game, :external_id ], unique: true
     add_index :items, :name
   end
 end
