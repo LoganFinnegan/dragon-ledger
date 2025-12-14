@@ -25,7 +25,7 @@ module Api
           seed_before = base.where("sampled_at < ?", from_time)
                             .order(sampled_at: :desc)
                             .first
-          records = [seed_before, *records].compact
+          records = [ seed_before, *records ].compact
         end
 
         # Seed after the window so we can bridge gaps that span past `to`
@@ -33,7 +33,7 @@ module Api
           seed_after = base.where("sampled_at > ?", to_time)
                            .order(sampled_at: :asc)
                            .first
-          records = [*records, seed_after].compact
+          records = [ *records, seed_after ].compact
         end
       end
 
