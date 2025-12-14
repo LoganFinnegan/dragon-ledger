@@ -1,24 +1,76 @@
-# README
+# Dragon Ledger
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dragon Ledger is a market tracking and analytics hub for MMO item prices, starting with RuneScape 3.  
+This is a portfolio project focused on production-shaped backend engineering: data modeling, ingestion reliability, testing, CI, and deployment.
 
-Things you may want to cover:
+## Current status
 
-* Ruby version
+- Threshold 0 complete
+- App boots locally
+- Landing page exists
+- Items placeholder page exists
 
-* System dependencies
+## Requirements
 
-* Configuration
+- Ruby (rbenv recommended)
+- Bundler
+- PostgreSQL
 
-* Database creation
+## Local setup
 
-* Database initialization
+Run this once:
 
-* How to run the test suite
+```bash
+bin/setup
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Run the app
 
-* Deployment instructions
+```bash
+./bin/dev
+```
 
-* ...
+Then open:
+
+- http://localhost:3000
+- http://localhost:3000/items
+
+## Useful commands
+
+Database:
+
+```bash
+bin/rails db:prepare
+bin/rails db:migrate
+```
+
+Rails console:
+
+```bash
+bin/rails console
+```
+
+Tests (default Rails test runner for now):
+
+```bash
+bin/rails test
+```
+
+## Project notes
+
+- No in game trading functionality
+- Price data will come from official endpoints first
+- Early milestones focus on ingesting and storing historical snapshots, then charting and mercher calculators
+
+## Roadmap
+
+### Threshold 1
+
+- Core data model (Item, PriceSnapshot)
+- Ingestion job with idempotency and tests
+
+### Threshold 2
+
+- Item search and item detail page
+- Charts backed by stored snapshots
+- Basic market metrics
