@@ -1,0 +1,53 @@
+<h1><%= @item.name %></h1>
+
+<p>
+  Latest daily:
+  <%= @latest_daily ? number_with_delimiter(@latest_daily.price) : "n/a" %>
+  (as of <%= @latest_daily&.sampled_at&.to_date || "n/a" %>)
+</p>
+
+<% if @item.icon_large_url.present? %>
+  <img src="<%= @item.icon_large_url %>" alt="<%= @item.name %>" width="48" height="48">
+<% elsif @item.icon_url.present? %>
+  <img src="<%= @item.icon_url %>" alt="<%= @item.name %>" width="32" height="32">
+<% end %>
+
+<p>
+  External ID: <%= @item.external_id %> •
+  Members: <%= @item.members ? "yes" : "no" %> •
+  Type: <%= @item.item_type.presence || "n/a" %>
+</p>
+
+<% if @item.description.present? %>
+  <p><%= @item.description %></p>
+<% end %>
+
+<div data-controller="price-chart"
+     data-price-chart-item-id-value="<%= @item.id %>"
+     data-price-chart-series-value="daily">
+
+  <form data-action="submit->price-chart#submit">
+    <label>
+      From
+      <input type="date" data-price-chart-target="from">
+    </label>
+
+    <label>
+      To
+      <input type="date" data-price-chart-target="to">
+    </label>
+
+    <label>
+      Fill gaps
+      <input type="checkbox" checked data-price-chart-target="fillGaps">
+    </label>
+
+    <button type="submit">Reload</button>
+  </form>
+
+  <canvas data-price-chart-target="canvas" height="120"></canvas>
+
+  <p style="margin-top: 8px; font-size: 0.9em;">
+    Dashed segments / hollow points indicate gap-filled days (price unchanged across the gap).
+  </p>
+</div>
